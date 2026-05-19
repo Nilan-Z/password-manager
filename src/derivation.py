@@ -1,5 +1,5 @@
 import random
-from sha256 import *
+from src.sha256 import *
 
 fake_disk = {
     "global_salt": "ff82a2419dff8a7f",
