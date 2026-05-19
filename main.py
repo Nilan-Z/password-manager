@@ -1,5 +1,5 @@
-from sha256 import *
-from derivation import *
+from src.sha256 import *
+from src.derivation import *
 
 fake_disk = {
   "users": {}
@@ -74,8 +74,6 @@ if __name__ == "__main__":
                     print(f"{s}: {bytes.fromhex(decrypted_hex).decode('latin1')}")
                     
                 elif option == "4":
-                  print("\n--- ENCRYPTED VAULT (TEST) ---")
-                  print(user_data["vault"])
                   login = False
             else:
               print("Wrong password")
