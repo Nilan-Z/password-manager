@@ -1,9 +1,11 @@
-from src.sha256 import *
-from src.derivation import *
+from src.sha256 import SHA256
+from src.derivation import Derivation
 
 fake_disk = {
   "users": {}
 }
+sha256 = SHA256()
+derivation = Derivation()
 
 if __name__ == "__main__":
   while True:
@@ -16,11 +18,11 @@ if __name__ == "__main__":
         print("Username already exists")
       else:
         password = input("Choose a master password: ")
-        salt = generate_salt()
-        master_key = derive_key(password, salt)
+        salt = derivation.generate_salt()
+        master_key = derivation.derive_key(password, salt)
         fake_disk["users"][username] = {
           "salt": salt,
-          "check": hash(master_key)[:8],
+          "check": sha256.hash(master_key)[:8],
           "vault": {}
         }
         
@@ -38,9 +40,9 @@ if __name__ == "__main__":
           if 0 <= idx < len(users_list):
             username = users_list[idx]
             user_data = fake_disk["users"][username]
-            master_key = derive_key(input("Enter your password: "), user_data["salt"])
+            master_key = derivation.derive_key(input("Enter your password: "), user_data["salt"])
             
-            if hash(master_key)[:8] == user_data["check"]:
+            if sha256.hash(master_key)[:8] == user_data["check"]:
               login = True
               while login == True:
                 print("\nSelect an option:\n\n[1] Add a password\n[2] Remove a password\n[3] View passwords\n[4] Logout")
@@ -49,7 +51,7 @@ if __name__ == "__main__":
                 if option == "1":
                   service = input("Service name: ")
                   password = input(f"Password for {service}: ")
-                  user_data["vault"][service] = xor_cipher(master_key, password)
+                  user_data["vault"][service] = derivation.xor_cipher(master_key, password)
                   
                 elif option == "2":
                   accounts = list(user_data["vault"].keys())
@@ -70,7 +72,7 @@ if __name__ == "__main__":
                     print("Vault is empty")
                   for s, h in user_data["vault"].items():
                     raw_data = bytes.fromhex(h).decode('latin1')
-                    decrypted_hex = xor_cipher(master_key, raw_data)
+                    decrypted_hex = derivation.xor_cipher(master_key, raw_data)
                     print(f"{s}: {bytes.fromhex(decrypted_hex).decode('latin1')}")
                     
                 elif option == "4":
