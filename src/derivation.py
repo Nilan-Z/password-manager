@@ -3,6 +3,9 @@ from src.sha256 import SHA256
 
 class Derivation:
     def __init__(self):
+        """
+        Derivation class is responsible for generating salts, deriving keys from passwords, and performing XOR cipher operations for encrypting and decrypting passwords in the vault.
+        It uses the SHA256 class to perform hashing operations, which are essential for both key derivation and generating salts."""
         fake_disk = {
             "global_salt": "ff82a2419dff8a7f",
             "master_check": "d273174f",
