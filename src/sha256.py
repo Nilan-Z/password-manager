@@ -1,107 +1,108 @@
-def get_binary(input):
-    if type(input) != str:
-        input = str(input)
-    result = ""
-    for characters in input:
-        value = ord(characters)
-        byte_val = ""
-        for i in range(8):
-            byte_val = str(int(value % 2)) + byte_val
-            value = value // 2
-        result += byte_val
-    return result
+class SHA256:    
+    def get_binary(self, input):
+        if type(input) != str:
+            input = str(input)
+        result = ""
+        for characters in input:
+            value = ord(characters)
+            byte_val = ""
+            for i in range(8):
+                byte_val = str(int(value % 2)) + byte_val
+                value = value // 2
+            result += byte_val
+        return result
 
-def padding(binary_input):
-    original_len = len(binary_input)
-    result = binary_input + "1"
-    while len(result) % 512 != 448:
-        result += "0"
-    length_bin = format(original_len, '064b')
-    result += length_bin
-    return result
+    def padding(self, binary_input):
+        original_len = len(binary_input)
+        result = binary_input + "1"
+        while len(result) % 512 != 448:
+            result += "0"
+        length_bin = format(original_len, '064b')
+        result += length_bin
+        return result
 
-def rotate_right(word, n):
-    return word[32 - n:] + word[0:32 - n]
+    def rotate_right(self, word, n):
+        return word[32 - n:] + word[0:32 - n]
 
-def shift_right(word, n):
-    return "0" * n + word[0:32 - n]
+    def shift_right(self, word, n):
+        return "0" * n + word[0:32 - n]
 
-def xor(word1, word2):
-    result = "".join("0" if word1[i] == word2[i] else "1" for i in range(len(word1)))
-    return result
+    def xor(self, word1, word2):
+        result = "".join("0" if word1[i] == word2[i] else "1" for i in range(len(word1)))
+        return result
 
-def addition_32(word1, word2):
-    res = (int(word1, 2) + int(word2, 2)) % 4294967296
-    return format(res, "032b")
+    def addition_32(self, word1, word2):
+        res = (int(word1, 2) + int(word2, 2)) % 4294967296
+        return format(res, "032b")
 
-def ch(e, f, g):
-    res = "".join(f[i] if e[i] == "1" else g[i] for i in range(len(e)))
-    return res
+    def ch(self, e, f, g):
+        res = "".join(f[i] if e[i] == "1" else g[i] for i in range(len(e)))
+        return res
 
-def maj(a, b, c):
-    res = ""
-    for i in range(len(a)):
-        count = int(a[i]) + int(b[i]) + int(c[i])
-        res += "1" if count >= 2 else "0"
-    return res
+    def maj(self, a, b, c):
+        res = ""
+        for i in range(len(a)):
+            count = int(a[i]) + int(b[i]) + int(c[i])
+            res += "1" if count >= 2 else "0"
+        return res
 
-def sigma0(w):
-    return xor(xor(rotate_right(w, 7), rotate_right(w, 18)), shift_right(w, 3))
+    def sigma0(self, w):
+        return self.xor(self.xor(self.rotate_right(w, 7), self.rotate_right(w, 18)), self.shift_right(w, 3))
 
-def sigma1(w):
-    return xor(xor(rotate_right(w, 17), rotate_right(w, 19)), shift_right(w, 10))
+    def sigma1(self, w):
+        return self.xor(self.xor(self.rotate_right(w, 17), self.rotate_right(w, 19)), self.shift_right(w, 10))
 
-def S0(w):
-    return xor(xor(rotate_right(w, 2), rotate_right(w, 13)), rotate_right(w, 22))
+    def S0(self, w):
+        return self.xor(self.xor(self.rotate_right(w, 2), self.rotate_right(w, 13)), self.rotate_right(w, 22))
 
-def S1(w):
-    return xor(xor(rotate_right(w, 6), rotate_right(w, 11)), rotate_right(w, 25))
+    def S1(self, w):
+        return self.xor(self.xor(self.rotate_right(w, 6), self.rotate_right(w, 11)), self.rotate_right(w, 25))
 
-def hash(text):
-    K_hex = [
-        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-    ]
-    K = [format(k, '032b') for k in K_hex]
+    def hash(self, text):
+        K_hex = [
+            0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+            0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+            0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+            0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+            0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+            0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+            0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+            0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+        ]
+        K = [format(k, '032b') for k in K_hex]
 
-    H_hex = [
-        0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-        0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
-    ]
-    h_vars = [format(h, '032b') for h in H_hex]
-    h0, h1, h2, h3, h4, h5, h6, h7 = h_vars
+        H_hex = [
+            0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+            0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+        ]
+        h_vars = [format(h, '032b') for h in H_hex]
+        h0, h1, h2, h3, h4, h5, h6, h7 = h_vars
 
-    padded = padding(get_binary(text))
-    
-    for i in range(0, len(padded), 512):
-        block = padded[i:i+512]
-        words = [block[j:j+32] for j in range(0, 512, 32)]
+        padded = self.padding(self.get_binary(text))
         
-        for j in range(16, 64):
-            val = addition_32(addition_32(sigma1(words[j-2]), words[j-7]), addition_32(sigma0(words[j-15]), words[j-16]))
-            words.append(val)
+        for i in range(0, len(padded), 512):
+            block = padded[i:i+512]
+            words = [block[j:j+32] for j in range(0, 512, 32)]
+            
+            for j in range(16, 64):
+                val = self.addition_32(self.addition_32(self.sigma1(words[j-2]), words[j-7]), self.addition_32(self.sigma0(words[j-15]), words[j-16]))
+                words.append(val)
 
-        a, b, c, d, e, f, g, h = h0, h1, h2, h3, h4, h5, h6, h7
+            a, b, c, d, e, f, g, h = h0, h1, h2, h3, h4, h5, h6, h7
 
-        for j in range(64):
-            t1 = addition_32(addition_32(addition_32(h, S1(e)), addition_32(ch(e, f, g), K[j])), words[j])
-            t2 = addition_32(S0(a), maj(a, b, c))
-            a, b, c, d, e, f, g, h = addition_32(t1, t2), a, b, c, addition_32(d, t1), e, f, g
+            for j in range(64):
+                t1 = self.addition_32(self.addition_32(self.addition_32(h, self.S1(e)), self.addition_32(self.ch(e, f, g), K[j])), words[j])
+                t2 = self.addition_32(self.S0(a), self.maj(a, b, c))
+                a, b, c, d, e, f, g, h = self.addition_32(t1, t2), a, b, c, self.addition_32(d, t1), e, f, g
 
-        h0 = addition_32(h0, a)
-        h1 = addition_32(h1, b)
-        h2 = addition_32(h2, c)
-        h3 = addition_32(h3, d)
-        h4 = addition_32(h4, e)
-        h5 = addition_32(h5, f)
-        h6 = addition_32(h6, g)
-        h7 = addition_32(h7, h)
+            h0 = self.addition_32(h0, a)
+            h1 = self.addition_32(h1, b)
+            h2 = self.addition_32(h2, c)
+            h3 = self.addition_32(h3, d)
+            h4 = self.addition_32(h4, e)
+            h5 = self.addition_32(h5, f)
+            h6 = self.addition_32(h6, g)
+            h7 = self.addition_32(h7, h)
 
-    result_hex = "".join(hex(int(x, 2))[2:].zfill(8) for x in [h0, h1, h2, h3, h4, h5, h6, h7])
-    return result_hex
+        result_hex = "".join(hex(int(x, 2))[2:].zfill(8) for x in [h0, h1, h2, h3, h4, h5, h6, h7])
+        return result_hex
