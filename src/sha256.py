@@ -1,5 +1,9 @@
 class SHA256:    
     def get_binary(self, input):
+        """
+        SHA256 algorithm operates on binary data, so this function converts the input string into its binary representation.
+        Each character is converted to its ASCII value and then to an 8-bit binary string.
+        """
         if type(input) != str:
             input = str(input)
         result = ""
