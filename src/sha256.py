@@ -55,6 +55,14 @@ class SHA256:
         return "0" * n + word[0:32 - n]
 
     def xor(self, word1, word2):
+        """
+        Performs a bitwise XOR operation between two binary strings of equal length. The result is a new binary string where each bit is '1' if the corresponding bits of the input strings are different, and '0' if they are the same.
+        Args:
+            word1 (str): The first binary string for the XOR operation.
+            word2 (str): The second binary string for the XOR operation, which must be of the same length as word1.
+        Returns:
+            str: The resulting binary string after the XOR operation.
+        """
         result = "".join("0" if word1[i] == word2[i] else "1" for i in range(len(word1)))
         return result
 
