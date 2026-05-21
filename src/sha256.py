@@ -33,6 +33,14 @@ class SHA256:
         return result
 
     def rotate_right(self, word, n):
+        """
+        Performs a right rotation on a 32-bit binary word by n positions. The bits that are shifted out on the right are reintroduced on the left.
+        Args:
+            word (str): A 32-bit binary string to be rotated.
+            n (int): The number of positions to rotate the bits to the right.
+        Returns:
+            str: The resulting binary string after the right rotation.
+        """
         return word[32 - n:] + word[0:32 - n]
 
     def shift_right(self, word, n):
