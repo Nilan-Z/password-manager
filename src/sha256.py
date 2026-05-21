@@ -17,6 +17,13 @@ class SHA256:
         return result
 
     def padding(self, binary_input):
+        """
+        The padding function prepares the binary input for processing by the SHA256 algorithm. It appends a '1' bit to the end of the input, followed by enough '0' bits to make the length of the input congruent to 448 modulo 512. Finally, it appends a 64-bit representation of the original input length.
+        Args:
+            binary_input (str): The binary string representation of the input data to be padded.
+        Returns:
+            str: The padded binary string ready for processing by the SHA256 algorithm.
+        """
         original_len = len(binary_input)
         result = binary_input + "1"
         while len(result) % 512 != 448:
