@@ -48,6 +48,14 @@ class Derivation:
         return key
 
     def xor_cipher(self, key, data):
+        """
+        Performs an XOR cipher operation on the given data using the provided key. The key is repeated as necessary to match the length of the data.
+        Args:
+            key (str): The key to be used for the XOR cipher operation.
+            data (str): The data to be encrypted or decrypted using the XOR cipher.
+        Returns:
+            str: The result of the XOR cipher operation, returned as a hexadecimal string.
+        """
         result_bytes = []
         for i in range(len(data)):
             char_val = ord(data[i])
