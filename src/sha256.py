@@ -44,6 +44,14 @@ class SHA256:
         return word[32 - n:] + word[0:32 - n]
 
     def shift_right(self, word, n):
+        """
+        Performs a right shift on a 32-bit binary word by n positions. The bits that are shifted out on the right are discarded, and the leftmost n bits are filled with zeros.
+        Args:
+            word (str): A 32-bit binary string to be shifted.
+            n (int): The number of positions to shift the bits to the right.
+        Returns:
+            str: The resulting binary string after the right shift.
+        """
         return "0" * n + word[0:32 - n]
 
     def xor(self, word1, word2):
