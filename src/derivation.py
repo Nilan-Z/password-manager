@@ -32,6 +32,14 @@ class Derivation:
         return salt
 
     def derive_key(self, password, salt):
+        """
+        Derives a key from the given password and salt using a simple iterative hashing process.
+        Args:
+            password (str): The password from which to derive the key.
+            salt (str): The salt to be used in the key derivation process.
+        Returns:
+            str: The derived key obtained by hashing the combination of the password and salt iteratively.
+        """
         assert isinstance(password, str)
         assert isinstance(salt, str)
         key = password + salt
