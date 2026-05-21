@@ -15,6 +15,13 @@ class Derivation:
         self.sha256 = SHA256()
 
     def generate_salt(self, length=16):
+        """
+        Generates a random salt string of the specified length.
+        Args:
+            length (int, optional): The length of the salt to be generated. Defaults to 16.
+        Returns:
+            str: A randomly generated salt string of the specified length.
+        """
         characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         salt = ""
         for index in range(length):
