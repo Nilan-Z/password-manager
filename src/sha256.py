@@ -91,6 +91,16 @@ class SHA256:
         return res
 
     def maj(self, a, b, c):
+        """
+        The maj function, also known as the "majority" function, is a fundamental component of the SHA256 algorithm. It takes three 32-bit binary words (a, b, c) as input and produces a new 32-bit binary word as output. The function operates on each bit position of the input words and produces a '1' in the output if at least two of the corresponding bits in the input words are '1'. Otherwise, it produces a '0'.
+        Args:
+            a (str): The first 32-bit binary string input to the maj function.
+            b (str): The second 32-bit binary string input to the maj function, which must be of the same length as a.
+            c (str): The third 32-bit binary string input to the maj function, which must be of the same length as a and b.
+
+        Returns:
+            str: The resulting 32-bit binary string after applying the maj function to the inputs a, b, and c.
+        """
         res = ""
         for i in range(len(a)):
             count = int(a[i]) + int(b[i]) + int(c[i])
