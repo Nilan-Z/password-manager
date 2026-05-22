@@ -79,7 +79,8 @@ class SHA256:
         return format(res, "032b")
 
     def ch(self, e, f, g):
-        """The ch function, also known as the "choose" function, is a fundamental component of the SHA256 algorithm. It takes three 32-bit binary words (e, f, g) as input and produces a new 32-bit binary word as output. The function operates on each bit position of the input words and produces a '1' in the output if the corresponding bit in e is '1' and the corresponding bit in f is '1', or if the corresponding bit in e is '0' and the corresponding bit in g is '1'. Otherwise, it produces a '0'.
+        """
+        The ch function, also known as the "choose" function, is a fundamental component of the SHA256 algorithm. It takes three 32-bit binary words (e, f, g) as input and produces a new 32-bit binary word as output. The function operates on each bit position of the input words and produces a '1' in the output if the corresponding bit in e is '1' and the corresponding bit in f is '1', or if the corresponding bit in e is '0' and the corresponding bit in g is '1'. Otherwise, it produces a '0'.
         Args:
             e (str): The first 32-bit binary string input to the ch function.
             f (str): The second 32-bit binary string input to the ch function, which must be of the same length as e.
