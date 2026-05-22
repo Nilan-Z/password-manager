@@ -67,6 +67,14 @@ class SHA256:
         return result
 
     def addition_32(self, word1, word2):
+        """
+        Performs addition of two 32-bit binary words modulo 2^32. The result is a new 32-bit binary string that represents the sum of the two input words, with any overflow beyond 32 bits discarded.
+        Args:
+            word1 (str): The first 32-bit binary string to be added.
+            word2 (str): The second 32-bit binary string to be added, which must be of the same length as word1.
+        Returns:
+            str: The resulting 32-bit binary string after the addition operation.
+        """
         res = (int(word1, 2) + int(word2, 2)) % 4294967296
         return format(res, "032b")
 
