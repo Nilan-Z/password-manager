@@ -109,6 +109,13 @@ class SHA256:
         return res
 
     def sigma0(self, w):
+        """
+        The sigma0 function is a specific transformation used in the SHA256 algorithm. It takes a 32-bit binary word (w) as input and produces a new 32-bit binary word as output. The function applies a combination of right rotations and right shifts to the input word. Specifically, it performs a right rotation by 7 bits, a right rotation by 18 bits, and a right shift by 3 bits on the input word, and then combines the results using a bitwise XOR operation.
+        Args:
+            w (str): A 32-bit binary string input to the sigma0 function.
+        Returns:
+            str: The resulting 32-bit binary string after applying the sigma0 function to the input w.
+        """
         return self.xor(self.xor(self.rotate_right(w, 7), self.rotate_right(w, 18)), self.shift_right(w, 3))
 
     def sigma1(self, w):
