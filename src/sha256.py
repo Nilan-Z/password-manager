@@ -149,6 +149,13 @@ class SHA256:
         return self.xor(self.xor(self.rotate_right(w, 6), self.rotate_right(w, 11)), self.rotate_right(w, 25))
 
     def hash(self, text):
+        """
+        The hash function is the main function of the SHA256 class that computes the SHA256 hash of a given input text. It initializes the necessary constants and variables, processes the input text in 512-bit blocks, and applies the SHA256 compression function to produce the final hash value. The resulting hash is returned as a hexadecimal string.
+        Args:
+            text (str): The input text for which the SHA256 hash is to be computed.
+        Returns:
+            str: The resulting SHA256 hash of the input text, represented as a hexadecimal string.
+        """
         K_hex = [
             0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
             0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
