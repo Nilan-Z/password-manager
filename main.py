@@ -8,6 +8,15 @@ sha256 = SHA256()
 derivation = Derivation()
 
 if __name__ == "__main__":
+  """
+  This code implements a simple command-line password manager.
+  It allows users to register with a username and master password, 
+  which is used to derive a master key for encrypting and decrypting stored passwords.
+  Users can add, remove, and view their stored passwords for different services.
+  The passwords are encrypted using an XOR cipher with the derived master key before
+  being stored in a fake disk (a dictionary in this case). The program also includes 
+  a login mechanism to ensure that only authorized users can access their stored passwords.
+  """
   while True:
     print("\n[1] Register\n[2] Login\n[3] Exit")
     start_choice = input("Choose an option: ")
