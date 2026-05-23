@@ -139,6 +139,13 @@ class SHA256:
         return self.xor(self.xor(self.rotate_right(w, 2), self.rotate_right(w, 13)), self.rotate_right(w, 22))
 
     def S1(self, w):
+        """
+        The S1 function is a specific transformation used in the SHA256 algorithm. It takes a 32-bit binary word (w) as input and produces a new 32-bit binary word as output. The function applies a combination of right rotations to the input word. Specifically, it performs a right rotation by 6 bits, a right rotation by 11 bits, and a right rotation by 25 bits on the input word, and then combines the results using a bitwise XOR operation.
+        Args:
+            w (str): A 32-bit binary string input to the S1 function.
+        Returns:
+            str: The resulting 32-bit binary string after applying the S1 function to the input w.
+        """
         return self.xor(self.xor(self.rotate_right(w, 6), self.rotate_right(w, 11)), self.rotate_right(w, 25))
 
     def hash(self, text):
