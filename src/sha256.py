@@ -129,6 +129,13 @@ class SHA256:
         return self.xor(self.xor(self.rotate_right(w, 17), self.rotate_right(w, 19)), self.shift_right(w, 10))
 
     def S0(self, w):
+        """
+        The S0 function is a specific transformation used in the SHA256 algorithm. It takes a 32-bit binary word (w) as input and produces a new 32-bit binary word as output. The function applies a combination of right rotations to the input word. Specifically, it performs a right rotation by 2 bits, a right rotation by 13 bits, and a right rotation by 22 bits on the input word, and then combines the results using a bitwise XOR operation.
+        Args:
+            w (str): A 32-bit binary string input to the S0 function.
+        Returns:
+            str: The resulting 32-bit binary string after applying the S0 function to the input w.
+        """
         return self.xor(self.xor(self.rotate_right(w, 2), self.rotate_right(w, 13)), self.rotate_right(w, 22))
 
     def S1(self, w):
