@@ -30,6 +30,8 @@ class SHA256:
         Returns:
             str: The padded binary string ready for processing by the SHA256 algorithm.
         """
+        if type(binary_input) != str:
+            binary_input = str(binary_input)
         original_len = len(binary_input)
         result = binary_input + "1"
         while len(result) % 512 != 448:
