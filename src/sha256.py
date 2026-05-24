@@ -4,8 +4,11 @@ class SHA256:
     """
     def get_binary(self, input):
         """
-        SHA256 algorithm operates on binary data, so this function converts the input string into its binary representation.
-        Each character is converted to its ASCII value and then to an 8-bit binary string.
+        Converts the input data into its binary representation. Each character in the input string is converted to its ASCII value, which is then represented as an 8-bit binary string. The resulting binary strings for all characters are concatenated together to form a single binary string that represents the entire input.
+        Args:
+            input (str): The input data to be converted into binary format.
+        Returns:
+            str: A binary string representation of the input data, where each character is represented by its 8-bit binary ASCII value.
         """
         if type(input) != str:
             input = str(input)
