@@ -1,4 +1,7 @@
 class SHA256:    
+    """
+    The SHA256 class implements the SHA256 hashing algorithm, which is a widely used cryptographic hash function. It provides methods for converting input data into binary format, applying necessary padding, performing bitwise operations such as rotations and shifts, and ultimately computing the SHA256 hash of the input data. The resulting hash is returned as a hexadecimal string.
+    """
     def get_binary(self, input):
         """
         SHA256 algorithm operates on binary data, so this function converts the input string into its binary representation.
