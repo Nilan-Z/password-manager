@@ -49,6 +49,8 @@ class SHA256:
         Returns:
             str: The resulting binary string after the right rotation.
         """
+        assert isinstance(word, str) and len(word) == 32
+        assert isinstance(n, int) and 0 <= n < 32
         return word[32 - n:] + word[0:32 - n]
 
     def shift_right(self, word, n):
