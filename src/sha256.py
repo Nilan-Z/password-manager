@@ -62,6 +62,8 @@ class SHA256:
         Returns:
             str: The resulting binary string after the right shift.
         """
+        assert isinstance(word, str) and len(word) == 32
+        assert isinstance(n, int) and 0 <= n < 32
         return "0" * n + word[0:32 - n]
 
     def xor(self, word1, word2):
@@ -73,6 +75,8 @@ class SHA256:
         Returns:
             str: The resulting binary string after the XOR operation.
         """
+        assert isinstance(word1, str) and len(word1) == 32
+        assert isinstance(word2, str) and len(word2) == 32
         result = "".join("0" if word1[i] == word2[i] else "1" for i in range(len(word1)))
         return result
 
