@@ -89,6 +89,8 @@ class SHA256:
         Returns:
             str: The resulting 32-bit binary string after the addition operation.
         """
+        assert isinstance(word1, str) and len(word1) == 32
+        assert isinstance(word2, str) and len(word2) == 32
         res = (int(word1, 2) + int(word2, 2)) % 4294967296
         return format(res, "032b")
 
