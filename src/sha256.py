@@ -122,6 +122,10 @@ class SHA256:
         Returns:
             str: The resulting 32-bit binary string after applying the maj function to the inputs a, b, and c.
         """
+        assert isinstance(a, str) and len(a) == 32
+        assert isinstance(b, str) and len(b) == 32  
+        assert isinstance(c, str) and len(c) == 32
+
         res = ""
         for i in range(len(a)):
             count = int(a[i]) + int(b[i]) + int(c[i])
@@ -136,6 +140,9 @@ class SHA256:
         Returns:
             str: The resulting 32-bit binary string after applying the sigma0 function to the input w.
         """
+
+        assert isinstance(w, str) and len(w) == 32
+        
         return self.xor(self.xor(self.rotate_right(w, 7), self.rotate_right(w, 18)), self.shift_right(w, 3))
 
     def sigma1(self, w):
