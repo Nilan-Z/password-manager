@@ -142,7 +142,7 @@ class SHA256:
         """
 
         assert isinstance(w, str) and len(w) == 32
-        
+
         return self.xor(self.xor(self.rotate_right(w, 7), self.rotate_right(w, 18)), self.shift_right(w, 3))
 
     def sigma1(self, w):
@@ -153,6 +153,8 @@ class SHA256:
         Returns:
             str: The resulting 32-bit binary string after applying the sigma1 function to the input w.
         """
+        assert isinstance(w, str) and len(w) == 32
+        
         return self.xor(self.xor(self.rotate_right(w, 17), self.rotate_right(w, 19)), self.shift_right(w, 10))
 
     def S0(self, w):
