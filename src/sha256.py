@@ -104,6 +104,10 @@ class SHA256:
             
         Returns:
             str: The resulting 32-bit binary string after applying the ch function to the inputs e, f, and g."""
+        assert isinstance(e, str) and len(e) == 32
+        assert isinstance(f, str) and len(f) == 32
+        assert isinstance(g, str) and len(g) == 32
+
         res = "".join(f[i] if e[i] == "1" else g[i] for i in range(len(e)))
         return res
 
