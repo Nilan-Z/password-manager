@@ -45,6 +45,7 @@ class Derivation:
         """
         assert isinstance(password, str)
         assert isinstance(salt, str)
+        
         key = password + salt
         for i in range(10):
             key = self.sha256.hash(key)
@@ -63,7 +64,7 @@ class Derivation:
         assert isinstance(data, str)
         assert len(key) > 0
         assert len(data) > 0
-        
+
         result_bytes = []
         for i in range(len(data)):
             char_val = ord(data[i])
