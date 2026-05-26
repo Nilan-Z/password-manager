@@ -178,7 +178,7 @@ class SHA256:
             str: The resulting 32-bit binary string after applying the S1 function to the input w.
         """
         assert isinstance(w, str) and len(w) == 32
-        
+
         return self.xor(self.xor(self.rotate_right(w, 6), self.rotate_right(w, 11)), self.rotate_right(w, 25))
 
     def hash(self, text):
@@ -189,6 +189,9 @@ class SHA256:
         Returns:
             str: The resulting SHA256 hash of the input text, represented as a hexadecimal string.
         """
+        if not isinstance(text, str):
+            text = str(text)
+
         K_hex = [
             0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
             0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
