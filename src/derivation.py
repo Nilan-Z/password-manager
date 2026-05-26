@@ -59,6 +59,11 @@ class Derivation:
         Returns:
             str: The result of the XOR cipher operation, returned as a hexadecimal string.
         """
+        assert isinstance(key, str)
+        assert isinstance(data, str)
+        assert len(key) > 0
+        assert len(data) > 0
+        
         result_bytes = []
         for i in range(len(data)):
             char_val = ord(data[i])
