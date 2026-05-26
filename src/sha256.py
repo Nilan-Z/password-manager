@@ -165,6 +165,8 @@ class SHA256:
         Returns:
             str: The resulting 32-bit binary string after applying the S0 function to the input w.
         """
+        assert isinstance(w, str) and len(w) == 32
+        
         return self.xor(self.xor(self.rotate_right(w, 2), self.rotate_right(w, 13)), self.rotate_right(w, 22))
 
     def S1(self, w):
