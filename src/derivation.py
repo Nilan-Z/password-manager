@@ -64,6 +64,7 @@ class Derivation:
             str: The result of the XOR cipher operation, returned as a hexadecimal string.
         """
         assert isinstance(key, str) and isinstance(data, str)
+        assert isinstance(data, str)
         assert len(key) > 0
         assert len(data) > 0
 
