@@ -25,6 +25,9 @@ class Derivation:
         Returns:
             str: A randomly generated salt string of the specified length.
         """
+        assert isinstance(length, int)
+        assert length > 0
+
         characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         salt = ""
         for index in range(length):
