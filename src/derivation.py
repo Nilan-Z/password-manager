@@ -65,8 +65,6 @@ class Derivation:
         """
         assert isinstance(key, str) and isinstance(data, str)
         assert isinstance(data, str)
-        assert len(key) > 0
-        assert len(data) > 0
 
         result_bytes = []
         for i in range(len(data)):
