@@ -183,7 +183,7 @@ class SHA256:
 
     def hash(self, text):
         """
-        The hash function is the main function of the SHA256 class that computes the SHA256 hash of a given input text. It initializes the necessary constants and variables, processes the input text in 512-bit blocks, and applies the SHA256 compression function to produce the final hash value. The resulting hash is returned as a hexadecimal string.
+        The hash function computes the SHA256 hash of the given input text. It first converts the input text into its binary representation, applies the necessary padding, and then processes the padded binary data in 512-bit blocks. The function uses a series of bitwise operations, including rotations, shifts, and XORs, along with predefined constants to iteratively compute the hash values. Finally, it concatenates the resulting hash values and returns them as a hexadecimal string.
         Args:
             text (str): The input text for which the SHA256 hash is to be computed.
         Returns:
