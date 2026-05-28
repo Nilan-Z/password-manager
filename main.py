@@ -1,21 +1,37 @@
+import json
+import os
+
 from src.sha256 import SHA256
 from src.derivation import Derivation
 
-fake_disk = {
-  "users": {}
-}
+DATA_FILE = "database.json"
+
+def load_data():
+    if not os.path.exists(DATA_FILE):
+        return {"users": {}}
+
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as file:
+            data = json.load(file)
+            if isinstance(data, dict) and "users" in data:
+                return data
+    except (json.JSONDecodeError, OSError):
+        pass
+
+    return {"users": {}}
+
+
+def save_data(data):
+    with open(DATA_FILE, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=2)
+
+
+fake_disk = load_data()
 sha256 = SHA256()
 derivation = Derivation()
 
 if __name__ == "__main__":
   """
-  This code implements a simple command-line password manager.
-  It allows users to register with a username and master password, 
-  which is used to derive a master key for encrypting and decrypting stored passwords.
-  Users can add, remove, and view their stored passwords for different services.
-  The passwords are encrypted using an XOR cipher with the derived master key before
-  being stored in a fake disk (a dictionary in this case). The program also includes 
-  a login mechanism to ensure that only authorized users can access their stored passwords.
   """
   while True:
     print("\n[1] Register\n[2] Login\n[3] Exit")
@@ -34,6 +50,7 @@ if __name__ == "__main__":
           "check": sha256.hash(master_key)[:8],
           "vault": {}
         }
+        save_data(fake_disk)
         
     elif start_choice == "2":
       users_list = list(fake_disk["users"].keys())
@@ -61,6 +78,7 @@ if __name__ == "__main__":
                   service = input("Service name: ")
                   password = input(f"Password for {service}: ")
                   user_data["vault"][service] = derivation.xor_cipher(master_key, password)
+                  save_data(fake_disk)
                   
                 elif option == "2":
                   accounts = list(user_data["vault"].keys())
@@ -74,6 +92,7 @@ if __name__ == "__main__":
                       num = int(num_str)
                       if 0 <= num < len(accounts):
                         del user_data["vault"][accounts[num]]
+                        save_data(fake_disk)
                       
                 elif option == "3":
                   print("\n--- DECRYPTED PASSWORDS ---")
