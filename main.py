@@ -26,7 +26,7 @@ def save_data(data):
         json.dump(data, file, indent=2)
 
 
-fake_disk = load_data()
+data = load_data()
 sha256 = SHA256()
 derivation = Derivation()
 
@@ -39,21 +39,21 @@ if __name__ == "__main__":
     
     if start_choice == "1":
       username = input("Choose a username: ")
-      if username in fake_disk["users"]:
+      if username in data["users"]:
         print("Username already exists")
       else:
         password = input("Choose a master password: ")
         salt = derivation.generate_salt()
         master_key = derivation.derive_key(password, salt)
-        fake_disk["users"][username] = {
+        data["users"][username] = {
           "salt": salt,
           "check": sha256.hash(master_key)[:8],
           "vault": {}
         }
-        save_data(fake_disk)
+        save_data(data)
         
     elif start_choice == "2":
-      users_list = list(fake_disk["users"].keys())
+      users_list = list(data["users"].keys())
       if not users_list:
         print("No accounts found")
       else:
@@ -65,7 +65,7 @@ if __name__ == "__main__":
           idx = int(user_idx_str)
           if 0 <= idx < len(users_list):
             username = users_list[idx]
-            user_data = fake_disk["users"][username]
+            user_data = data["users"][username]
             master_key = derivation.derive_key(input("Enter your password: "), user_data["salt"])
             
             if sha256.hash(master_key)[:8] == user_data["check"]:
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                   service = input("Service name: ")
                   password = input(f"Password for {service}: ")
                   user_data["vault"][service] = derivation.xor_cipher(master_key, password)
-                  save_data(fake_disk)
+                  save_data(data)
                   
                 elif option == "2":
                   accounts = list(user_data["vault"].keys())
@@ -92,7 +92,7 @@ if __name__ == "__main__":
                       num = int(num_str)
                       if 0 <= num < len(accounts):
                         del user_data["vault"][accounts[num]]
-                        save_data(fake_disk)
+                        save_data(data)
                       
                 elif option == "3":
                   print("\n--- DECRYPTED PASSWORDS ---")
