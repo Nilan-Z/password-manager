@@ -1,4 +1,5 @@
 import random
+
 from src.sha256 import SHA256
 
 class Derivation:
