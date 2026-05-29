@@ -36,3 +36,4 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 
 ## 📄 License
 
+This project is licensed under the [MIT License](LICENSE).
