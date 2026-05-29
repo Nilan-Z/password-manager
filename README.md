@@ -10,6 +10,16 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 
 ## 📚 Table of Contents
 
+- Features
+- Note
+- Installation
+- Usage
+- Storage
+- Security
+- Example
+- License
+
+---
 ## 🚀 Features
 
 ## ⚠️ Note
@@ -19,6 +29,8 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 ## ▶️ Usage
 
 ## ⚙️ Storage
+
+## 🧠 Security
 
 ## 🧾 Example
 
