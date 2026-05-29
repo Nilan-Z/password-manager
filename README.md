@@ -6,6 +6,8 @@
 
 ## ⚠️ Note
 
+## 🛠️ Installation
+
 ## ▶️ Usage
 
 ## ⚙️ Storage
