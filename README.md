@@ -71,6 +71,7 @@ Notes:
 - Vault entries are encrypted and saved automatically on add/remove operations.
 - The master password is required to decrypt stored passwords.
 
+---
 
 ## ⚙️ Storage
 
