@@ -98,6 +98,14 @@ If `data.json` does not exist or is invalid, the app starts with an empty vault.
 
 ## 🧠 Security
 
+The app uses:
+
+- SHA256 hashing for password-derived key generation
+- a random salt per user
+- XOR cipher for vault encryption
+
+---
+
 ## 🧾 Example
 
 ## 📄 License
