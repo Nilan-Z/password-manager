@@ -20,11 +20,29 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 - License
 
 ---
+
 ## 🚀 Features
 
 ## ⚠️ Note
 
 ## 🛠️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Nilan-Z/password-manager.git
+cd password-manager
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+If there is no `requirements.txt`, the project only depends on the Python standard library.
+
+---
 
 ## ▶️ Usage
 
