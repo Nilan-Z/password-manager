@@ -94,6 +94,7 @@ The file structure looks like this:
 
 If `data.json` does not exist or is invalid, the app starts with an empty vault.
 
+---
 
 ## 🧠 Security
 
