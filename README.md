@@ -75,6 +75,26 @@ Notes:
 
 ## ⚙️ Storage
 
+User data is stored in `data.json` in the repository root.
+The file structure looks like this:
+
+```json
+{
+  "users": {
+    "username": {
+      "salt": "...",
+      "check": "...",
+      "vault": {
+        "service": "..."
+      }
+    }
+  }
+}
+```
+
+If `data.json` does not exist or is invalid, the app starts with an empty vault.
+
+
 ## 🧠 Security
 
 ## 🧾 Example
