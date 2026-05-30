@@ -46,6 +46,32 @@ If there is no `requirements.txt`, the project only depends on the Python standa
 
 ## ▶️ Usage
 
+Run the command-line app:
+
+```bash
+python main.py
+```
+
+Then choose one of the options:
+
+    [1] Register
+    [2] Login
+    [3] Exit
+
+After login, choose:
+
+    [1] Add a password
+    [2] Remove a password
+    [3] View passwords
+    [4] Logout
+
+Notes:
+
+- Each account is stored under a username.
+- Vault entries are encrypted and saved automatically on add/remove operations.
+- The master password is required to decrypt stored passwords.
+
+
 ## ⚙️ Storage
 
 ## 🧠 Security
