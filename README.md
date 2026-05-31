@@ -23,6 +23,12 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 
 ## 🚀 Features
 
+- Register and log in with a master password
+- Store and remove service passwords in a per-user vault
+- Encrypt vault entries before saving to disk
+- Persist user data in `data.json`
+- Lightweight, minimal command-line interface
+
 ## ⚠️ Note
 
 ## 🛠️ Installation
