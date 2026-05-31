@@ -29,6 +29,8 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 - Persist user data in `data.json`
 - Lightweight, minimal command-line interface
 
+---
+
 ## ⚠️ Note
 
 ## 🛠️ Installation
