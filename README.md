@@ -53,8 +53,6 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-If there is no `requirements.txt`, the project only depends on the Python standard library.
-
 ---
 
 ## ▶️ Usage
