@@ -119,6 +119,28 @@ The app uses:
 
 ## 🧾 Example
 
+Register a new user, add a password for a service, then view the stored credentials after login.
+
+Example CLI flow:
+
+    [1] Register
+    Choose a username: alice
+    Choose a master password: ********
+
+    [2] Login
+    Select profile number: 0
+    Enter your password: ********
+
+    [1] Add a password
+    Service name: email
+    Password for email: mySecret123
+
+    [3] View passwords
+    --- DECRYPTED PASSWORDS ---
+    email: mySecret123
+
+---
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
