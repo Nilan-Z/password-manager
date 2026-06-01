@@ -36,6 +36,8 @@ This project uses a master password, SHA256-based key derivation, and XOR-based 
 This password manager is a learning project and is not production-ready.
 The current encryption method is a simple XOR cipher and should be replaced with a stronger library like `cryptography` for real use.
 
+---
+
 ## 🛠️ Installation
 
 Clone the repository:
