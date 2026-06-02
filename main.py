@@ -60,6 +60,7 @@ if __name__ == "__main__":
 	print(ascii_art)
 	
 	while True:
+		clear_screen()
 		print(f"\n{Fore.CYAN}{'='*40}")
 		print(f"{Fore.CYAN}[1] Register\n[2] Login\n[3] Exit")
 		print(f"{Fore.CYAN}{'='*40}")
@@ -68,7 +69,8 @@ if __name__ == "__main__":
 		if start_choice == "1":
 			username = input(f"{Fore.YELLOW}Choose a username: {Style.RESET_ALL}")
 			if username in data["users"]:
-				print(f"{Fore.RED}✗ Username already exists")
+				print(f"{Fore.RED}Username already exists")
+				input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 			else:
 				password = input(f"{Fore.YELLOW}Choose a master password: {Style.RESET_ALL}")
 				salt = derivation.generate_salt()
@@ -79,13 +81,15 @@ if __name__ == "__main__":
 					"vault": {}
 				}
 				save_data(data)
-				print(f"{Fore.GREEN}✓ Account registered successfully")
+				print(f"{Fore.GREEN}Account registered successfully")
+				input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 				
 		elif start_choice == "2":
 			users_list = list(data["users"].keys())
 			if not users_list:
-				print(f"{Fore.RED}✗ No accounts found")
+				print(f"{Fore.RED}No accounts found")
 			else:
+				clear_screen()
 				print(f"{Fore.CYAN}Select your profile:")
 				for i in range(len(users_list)):
 					print(f"{Fore.CYAN}[{i}] {users_list[i]}")
@@ -99,25 +103,30 @@ if __name__ == "__main__":
 						master_key = derivation.derive_key(input(f"{Fore.YELLOW}Enter your password: {Style.RESET_ALL}"), user_data["salt"])
 						
 						if sha256.hash(master_key)[:8] == user_data["check"]:
-							print(f"{Fore.GREEN}✓ Login successful")
+							clear_screen()
+							print(f"{Fore.GREEN}Login successful")
 							login = True
 							while login == True:
+								clear_screen()
 								print(f"\n{Fore.CYAN}{'='*40}")
 								print(f"{Fore.CYAN}[1] Add a password\n[2] Remove a password\n[3] View passwords\n[4] Logout")
 								print(f"{Fore.CYAN}{'='*40}")
 								option = input(f"{Fore.YELLOW}Choose an option: {Style.RESET_ALL}")
 								
 								if option == "1":
+									clear_screen()
 									service = input(f"{Fore.YELLOW}Service name: {Style.RESET_ALL}")
 									password = input(f"{Fore.YELLOW}Password for {service}: {Style.RESET_ALL}")
 									user_data["vault"][service] = derivation.xor_cipher(master_key, password)
 									save_data(data)
-									print(f"{Fore.GREEN}✓ Password added successfully")
+									print(f"{Fore.GREEN}Password added successfully")
+									input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 									
 								elif option == "2":
+									clear_screen()
 									accounts = list(user_data["vault"].keys())
 									if not accounts:
-										print(f"{Fore.YELLOW}⚠ No passwords to remove")
+										print(f"{Fore.YELLOW}No passwords to remove")
 									else:
 										print(f"{Fore.CYAN}Select password to remove:")
 										for i in range(len(accounts)):
@@ -128,26 +137,31 @@ if __name__ == "__main__":
 											if 0 <= num < len(accounts):
 												del user_data["vault"][accounts[num]]
 												save_data(data)
-												print(f"{Fore.GREEN}✓ Password removed successfully")
+												print(f"{Fore.GREEN}Password removed successfully")
+										input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 										
 								elif option == "3":
+									clear_screen()
 									print(f"\n{Fore.CYAN}{'='*40}")
 									print(f"{Fore.CYAN}DECRYPTED PASSWORDS")
 									print(f"{Fore.CYAN}{'='*40}")
 									if not user_data["vault"]:
-										print(f"{Fore.YELLOW}⚠ Vault is empty")
+										print(f"{Fore.YELLOW}Vault is empty")
 									else:
 										for s, h in user_data["vault"].items():
 											raw_data = bytes.fromhex(h).decode('latin1')
 											decrypted_hex = derivation.xor_cipher(master_key, raw_data)
 											pwd = bytes.fromhex(decrypted_hex).decode('latin1')
 											print(f"{Fore.GREEN}{s}{Style.RESET_ALL}: {pwd}")
+									input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 										
 								elif option == "4":
 									login = False
-									print(f"{Fore.GREEN}✓ Logged out successfully")
+									clear_screen()
+									print(f"{Fore.GREEN}Logged out successfully")
+									input(f"{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
 						else:
-							print(f"{Fore.RED}✗ Wrong password")
+							print(f"{Fore.RED}Wrong password")
 				
 		elif start_choice == "3":
 			break
