@@ -9,6 +9,9 @@ init(autoreset=True)
 
 DATA_FILE = "data/data.json"
 
+def clear_screen():
+	os.system('cls' if os.name == 'nt' else 'clear')
+
 def load_data():
 	if not os.path.exists(DATA_FILE):
 		return {"users": {}}
@@ -37,6 +40,7 @@ if __name__ == "__main__":
 	"""
 	This is the main entry point of the password manager application. It provides a command-line interface for users to register, log in, and manage their passwords securely. The application uses the Derivation class to handle key generation and encryption, and the SHA256 class for hashing operations. User data is stored in a JSON file, and the application ensures that passwords are encrypted before being saved to the vault.
 	"""
+	clear_screen()
 	ascii_art = f"""{Fore.CYAN}
 	 ██████╗  █████╗ ███████╗███████╗██╗    ██╗ ██████╗ ██████╗ ██████╗ 
 	 ██╔══██╗██╔══██╗██╔════╝██╔════╝██║    ██║██╔═══██╗██╔══██╗██╔══██╗
