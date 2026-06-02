@@ -1,8 +1,11 @@
 import json
 import os
+from colorama import Fore, Back, Style, init
 
 from src.sha256 import SHA256
 from src.derivation import Derivation
+
+init(autoreset=True)
 
 DATA_FILE = "data/data.json"
 
@@ -35,15 +38,17 @@ if __name__ == "__main__":
   This is the main entry point of the password manager application. It provides a command-line interface for users to register, log in, and manage their passwords securely. The application uses the Derivation class to handle key generation and encryption, and the SHA256 class for hashing operations. User data is stored in a JSON file, and the application ensures that passwords are encrypted before being saved to the vault.
   """
   while True:
-    print("\n[1] Register\n[2] Login\n[3] Exit")
-    start_choice = input("Choose an option: ")
+    print(f"\n{Fore.CYAN}{'='*40}")
+    print(f"{Fore.CYAN}[1] Register\n[2] Login\n[3] Exit")
+    print(f"{Fore.CYAN}{'='*40}")
+    start_choice = input(f"{Fore.YELLOW}Choose an option: {Style.RESET_ALL}")
     
     if start_choice == "1":
-      username = input("Choose a username: ")
+      username = input(f"{Fore.YELLOW}Choose a username: {Style.RESET_ALL}")
       if username in data["users"]:
-        print("Username already exists")
+        print(f"{Fore.RED}✗ Username already exists")
       else:
-        password = input("Choose a master password: ")
+        password = input(f"{Fore.YELLOW}Choose a master password: {Style.RESET_ALL}")
         salt = derivation.generate_salt()
         master_key = derivation.derive_key(password, salt)
         data["users"][username] = {
@@ -52,62 +57,75 @@ if __name__ == "__main__":
           "vault": {}
         }
         save_data(data)
+        print(f"{Fore.GREEN} Account registered successfully")
         
     elif start_choice == "2":
       users_list = list(data["users"].keys())
       if not users_list:
-        print("No accounts found")
+        print(f"{Fore.RED}✗ No accounts found")
       else:
+        print(f"{Fore.CYAN}Select your profile:")
         for i in range(len(users_list)):
-          print(f"[{i}] {users_list[i]}")
+          print(f"{Fore.CYAN}[{i}] {users_list[i]}")
           
-        user_idx_str = input("Select profile number: ")
+        user_idx_str = input(f"{Fore.YELLOW}Select profile number: {Style.RESET_ALL}")
         if user_idx_str.isdigit():
           idx = int(user_idx_str)
           if 0 <= idx < len(users_list):
             username = users_list[idx]
             user_data = data["users"][username]
-            master_key = derivation.derive_key(input("Enter your password: "), user_data["salt"])
+            master_key = derivation.derive_key(input(f"{Fore.YELLOW}Enter your password: {Style.RESET_ALL}"), user_data["salt"])
             
             if sha256.hash(master_key)[:8] == user_data["check"]:
+              print(f"{Fore.GREEN}Login successful")
               login = True
               while login == True:
-                print("\nSelect an option:\n\n[1] Add a password\n[2] Remove a password\n[3] View passwords\n[4] Logout")
-                option = input("Choose an option: ")
+                print(f"\n{Fore.CYAN}{'='*40}")
+                print(f"{Fore.CYAN}[1] Add a password\n[2] Remove a password\n[3] View passwords\n[4] Logout")
+                print(f"{Fore.CYAN}{'='*40}")
+                option = input(f"{Fore.YELLOW}Choose an option: {Style.RESET_ALL}")
                 
                 if option == "1":
-                  service = input("Service name: ")
-                  password = input(f"Password for {service}: ")
+                  service = input(f"{Fore.YELLOW}Service name: {Style.RESET_ALL}")
+                  password = input(f"{Fore.YELLOW}Password for {service}: {Style.RESET_ALL}")
                   user_data["vault"][service] = derivation.xor_cipher(master_key, password)
                   save_data(data)
+                  print(f"{Fore.GREEN}Password added successfully")
                   
                 elif option == "2":
                   accounts = list(user_data["vault"].keys())
                   if not accounts:
-                    print("No passwords to remove")
+                    print(f"{Fore.YELLOW}No passwords to remove")
                   else:
+                    print(f"{Fore.CYAN}Select password to remove:")
                     for i in range(len(accounts)):
-                      print(f"[{i}] {accounts[i]}")
-                    num_str = input("Select the number to remove: ")
+                      print(f"{Fore.CYAN}[{i}] {accounts[i]}")
+                    num_str = input(f"{Fore.YELLOW}Select the number to remove: {Style.RESET_ALL}")
                     if num_str.isdigit():
                       num = int(num_str)
                       if 0 <= num < len(accounts):
                         del user_data["vault"][accounts[num]]
                         save_data(data)
+                        print(f"{Fore.GREEN}Password removed successfully")
                       
                 elif option == "3":
-                  print("\n--- DECRYPTED PASSWORDS ---")
+                  print(f"\n{Fore.CYAN}{'='*40}")
+                  print(f"{Fore.CYAN}DECRYPTED PASSWORDS")
+                  print(f"{Fore.CYAN}{'='*40}")
                   if not user_data["vault"]:
-                    print("Vault is empty")
-                  for s, h in user_data["vault"].items():
-                    raw_data = bytes.fromhex(h).decode('latin1')
-                    decrypted_hex = derivation.xor_cipher(master_key, raw_data)
-                    print(f"{s}: {bytes.fromhex(decrypted_hex).decode('latin1')}")
+                    print(f"{Fore.YELLOW}Vault is empty")
+                  else:
+                    for s, h in user_data["vault"].items():
+                      raw_data = bytes.fromhex(h).decode('latin1')
+                      decrypted_hex = derivation.xor_cipher(master_key, raw_data)
+                      pwd = bytes.fromhex(decrypted_hex).decode('latin1')
+                      print(f"{Fore.GREEN}{s}{Style.RESET_ALL}: {pwd}")
                     
                 elif option == "4":
                   login = False
+                  print(f"{Fore.GREEN}Logged out successfully")
             else:
-              print("Wrong password")
+              print(f"{Fore.RED}Wrong password")
           
     elif start_choice == "3":
       break
