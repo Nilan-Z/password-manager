@@ -27,7 +27,7 @@ def print_menu(title, options, color=Fore.CYAN):
 	print(f"║ {title.center(46)} ║")
 	print(f"╠{'═' * 48}╣")
 	for key, value in options.items():
-		print(f"║ {Fore.YELLOW}[{key}]{Style.RESET_ALL} {value:<41} ║")
+		print(f"║ {Fore.YELLOW}[{key}]{Style.RESET_ALL} {value:<41}  ║")
 	print(f"╚{'═' * 48}╝{Style.RESET_ALL}")
 
 def print_success(text):
