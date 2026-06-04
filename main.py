@@ -37,11 +37,17 @@ def print_menu(title, options, color=Fore.CYAN):
 	print(f"╚{'═' * 48}╝{Style.RESET_ALL}")
 
 def print_success(text):
-	"""Print success message"""
+	"""Print success message
+	Args:
+	   text (str): The message to print
+	"""
 	print(f"{Fore.GREEN}✓ {text}{Style.RESET_ALL}")
 
 def print_error(text):
-	"""Print error message"""
+	"""Print error message
+	Args:
+	   text (str): The message to print
+	"""
 	print(f"{Fore.RED}✗ {text}{Style.RESET_ALL}")
 
 def print_info(text):
