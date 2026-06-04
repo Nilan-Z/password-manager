@@ -121,23 +121,34 @@ The app uses:
 
 Register a new user, add a password for a service, then view the stored credentials after login.
 
-Example CLI flow:
+### Main Menu
 
-    [1] Register
-    Choose a username: alice
-    Choose a master password: ********
+You'll be greeted with the password manager ASCII art and a beautiful menu:
 
-    [2] Login
-    Select profile number: 0
-    Enter your password: ********
+```
+╔════════════════════════════════════════════════╗
+║             MAIN MENU                          ║
+╠════════════════════════════════════════════════╣
+║ [1] Register - Create new account              ║
+║ [2] Login - Access your vault                  ║
+║ [3] Exit - Close application                   ║
+╚════════════════════════════════════════════════╝
+```
 
-    [1] Add a password
-    Service name: email
-    Password for email: mySecret123
+### Vault Management
 
-    [3] View passwords
-    --- DECRYPTED PASSWORDS ---
-    email: mySecret123
+After login, access your password vault with an intuitive menu:
+
+```
+╔════════════════════════════════════════════════╗
+║          VAULT - your_username                 ║
+╠════════════════════════════════════════════════╣
+║ [1] Add password                               ║
+║ [2] Remove password                            ║
+║ [3] View passwords                             ║
+║ [4] Logout                                     ║
+╚════════════════════════════════════════════════╝
+```
 
 ---
 
