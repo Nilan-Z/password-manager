@@ -22,7 +22,13 @@ def print_box(text, color=Fore.CYAN, width=50):
 	print(f"{color}└{'─' * (width - 2)}┘{Style.RESET_ALL}")
 
 def print_menu(title, options, color=Fore.CYAN):
-	"""Print a formatted menu"""
+	"""
+	Print a menu with options
+	Args:
+		title (str): The title of the menu
+		options (dict): A dictionary of options
+		color (str): The color for the menu
+	"""
 	print(f"\n{color}╔{'═' * 48}╗")
 	print(f"║ {title.center(46)} ║")
 	print(f"╠{'═' * 48}╣")
