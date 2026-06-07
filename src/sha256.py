@@ -53,6 +53,7 @@ class SHA256:
         """
         assert isinstance(word, str) and len(word) == 32
         assert isinstance(n, int) and 0 <= n < 32 
+
         return word[32 - n:] + word[0:32 - n]
 
     def shift_right(self, word, n):
@@ -66,6 +67,7 @@ class SHA256:
         """
         assert isinstance(word, str) and len(word) == 32
         assert isinstance(n, int) and 0 <= n < 32
+
         return "0" * n + word[0:32 - n]
 
     def xor(self, word1, word2):
@@ -79,6 +81,7 @@ class SHA256:
         """
         assert isinstance(word1, str) and len(word1) == 32
         assert isinstance(word2, str) and len(word2) == 32
+
         result = "".join("0" if word1[i] == word2[i] else "1" for i in range(len(word1)))
         return result
 
@@ -93,6 +96,7 @@ class SHA256:
         """
         assert isinstance(word1, str) and len(word1) == 32
         assert isinstance(word2, str) and len(word2) == 32
+        
         res = (int(word1, 2) + int(word2, 2)) % 4294967296
         return format(res, "032b")
 
