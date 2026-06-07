@@ -10,8 +10,9 @@ class SHA256:
         Returns:
             str: A binary string representation of the input data, where each character is represented by its 8-bit binary ASCII value.
         """
-        if type(input) != str:
+        if type(input) != str and input is not None:
             input = str(input)
+
         result = ""
         for characters in input:
             value = ord(characters)
