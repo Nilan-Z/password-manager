@@ -96,7 +96,7 @@ class SHA256:
         """
         assert isinstance(word1, str) and len(word1) == 32
         assert isinstance(word2, str) and len(word2) == 32
-        
+
         res = (int(word1, 2) + int(word2, 2)) % 4294967296
         return format(res, "032b")
 
@@ -195,7 +195,7 @@ class SHA256:
         Returns:
             str: The resulting SHA256 hash of the input text, represented as a hexadecimal string.
         """
-        if not isinstance(text, str):
+        if not isinstance(text, str) and text is not None:
             text = str(text)
 
         K_hex = [
